@@ -38,8 +38,6 @@ Game controls will include a start button which will start and restart the game.
 
 ![wireframe](https://github.com/HardowarA/Downfall/blob/master/assets/images/Wireframe.png)  
 
-*wireframe pictures to be added* 
-
 ### Implementation Timeline 
 
 **Day One**: Setup and game start along with implementing bouncing ball static platforms.
