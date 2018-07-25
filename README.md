@@ -36,7 +36,7 @@ Implementing collision and bouncing/jumping systems could potentially be a bit t
 This app will consist of a single page with the main game board along with short rules/description, and links. 
 Game controls will include a start button which will start and restart the game. 
 
-~wireframe pictures to be added~ 
+*wireframe pictures to be added* 
 
 ### Implementation Timeline 
 
