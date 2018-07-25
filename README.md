@@ -5,7 +5,7 @@ Downfall's concept is based off of a sort of modified and reversed Doodle Jump.
 There will initially be a ball perpetually bouncing on a platform with approximatley 3-5 holes in it,
 and it is the player's goal to drop the ball down the holes. They will earn point for doing so.
 The challenge of the game is that the platform(s) will be comprised of 3 different colors. 
-And the ball will be able to toggle between 2 different colors.One color will automatically 
+And the ball will be able to toggle between 2 different colors. One color will automatically 
 end the game for the player if their ball lands on it. The player will have to toggle the 
 ball's current color to match one of the other 2 color's before being able to safely land on that color.
 
