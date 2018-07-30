@@ -4,6 +4,38 @@
   display: flex;
   justify-content: center;
 }
+
+html{
+  /* background-color: #000066; */
+  background-image: url('starry3.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 canvas {
   background: #eee; display: block; margin: 0 auto;
+  background-image: url('starry1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.buttonDiv {
+  height: 30px;
+  padding: 20px;
+}
+
+button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  border-radius: 5px;
+  background-color: blue;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: yellow;
 }

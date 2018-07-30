@@ -104,7 +104,7 @@ this.canvas = document.getElementById("downfallCanvas");
   let balldx = 5;
   let balldy = 5;
   let ballrad = 10;
-  let ballDisplacement = 103;
+  let ballDisplacement = 90;
   let lowestPoint = 390;
 
   let maxlinkdx = 500;
@@ -188,69 +188,215 @@ this.canvas = document.getElementById("downfallCanvas");
     let greatestWidthCoverage = 450;
 
     let targetWidthCoverage = (greatestWidthCoverage - Math.floor(Math.random()*50));
-    let currentWidthCoverage = 0;
     let maxdeathSpaces = 5 - Math.floor(Math.random()* 2);
     let maxdeathSpaceCoverage = 200;
     let currentDeathSpaces = 0;
     let currentDeathSpaceCoverage = 0;
 
-    function doesPlatformConflict(plat) {
-      debugger
-      if (platformArray.length === 0) {
-        return true;
-      }
-      let doesIt = true;
-      for(let i = 0; i < platformArray.length; i++) {
-        let platform = platformArray[i];
-        debugger
-        if( !((platform.platformx + platform.platformlength < plat.platformx) &&
-           (platform.platformx + platform.platformlength > plat.platformx + plat.platformlength) &&
-           (platform.platformx < plat.platformx) &&
-           (platform.platformx > plat.platformx + plat.platformlength) )) {
-             doesIt = false;
+    let minEmptySpaces = 3;
+    // let current EmptySpaces = 0;
+
+    // function doesPlatformConflict(plat) {
+    //   debugger
+    //   if (platformArray.length === 0) {
+    //     return true;
+    //   }
+    //   let doesIt = true;
+    //   for(let i = 0; i < platformArray.length; i++) {
+    //     let platform = platformArray[i];
+    //     debugger
+    //     if( !((platform.platformx + platform.platformlength < plat.platformx) &&
+    //        (platform.platformx + platform.platformlength > plat.platformx + plat.platformlength) &&
+    //        (platform.platformx < plat.platformx) &&
+    //        (platform.platformx > plat.platformx + plat.platformlength) )) {
+    //          doesIt = false;
+    //     }
+    //   }
+    //   return doesIt;
+    // }
+    // // debugger
+    // while(currentWidthCoverage < targetWidthCoverage) {
+    //   debugger
+    //   let platWidth = Math.floor(Math.random()*501);
+    //   let platLength = 150 - Math.floor(Math.random()*100);
+    //   let colorArray = ['red', 'green'];
+    //   let colorChoice = 1;
+    //   if (maxdeathSpaces > currentDeathSpaces && maxdeathSpaceCoverage > currentDeathSpaceCoverage) {
+    //     colorChoice = Math.floor(Math.random()*2);
+    //   }
+    //   let platColor = colorArray[colorChoice];
+    //   let plat = new Platform(platWidth, height, platLength, platColor);
+    //   debugger
+    //   // doesPlatformConflict(plat);
+    //   // while(doesPlatformConflict(plat) !== true) {
+    //   //   debugger
+    //   //  platWidth = 150 - Math.floor(Math.random()*100);
+    //   //  platLength = 150 - Math.floor(Math.random()*100);
+    //   //  colorArray = ['red', 'green'];
+    //   //  if (maxdeathSpaces < currentDeathSpaces && maxdeathSpaceCoverage < currentDeathSpaceCoverage) {
+    //   //    colorChoice = Math.floor(Math.random()*2);
+    //   //  } else {
+    //   //    colorChoice = 1;
+    //   //  }
+    //   //  platColor = colorArray[colorChoice];
+    //   //  plat = new Platform(platWidth, height, platLength, platColor);
+    //   //  debugger
+    //   // }
+    //   platformArray.push(plat);
+    //   let platLeft = new Platform(platWidth - 500, height, platLength, platColor);
+    //   let platRight = new Platform(platWidth + 500, height, platLength, platColor);
+    //   platformArray.push(platLeft);
+    //   platformArray.push(platRight);
+    //   currentWidthCoverage += platLength;
+    //   if(platColor === 'red') {
+    //     currentDeathSpaces += 1;
+    //     currentDeathSpaceCoverage += platLength;
+    //   }
+    // }
+    // let platWidth = 0;
+    // let emptyCount = 0;
+    // while(platWidth < 500) {
+    //       let platLength = 150 - Math.floor(Math.random()*100);
+    //       if(platWidth + platLength > 500) {
+    //         debugger
+    //         platLength = 500 - platWidth;
+    //       }
+    //       let colorArray = ['red', 'green'];
+    //       let colorChoice = 1;
+    //       if (maxdeathSpaces > currentDeathSpaces && maxdeathSpaceCoverage > currentDeathSpaceCoverage) {
+    //         colorChoice = Math.floor(Math.random()*2);
+    //       }
+    //       let platColor = colorArray[colorChoice];
+    //       let empty = Math.floor(Math.random()*2);
+    //       if(emptyCount === 0 && platWidth + platLength >= 500) {
+    //         empty = 1;
+    //         emptyCount++;
+    //       }
+    //
+    //       if(empty === 0) {
+    //         platWidth += platLength;
+    //         let plat = new Platform(platWidth, height, platLength, platColor);
+    //         let platLeft = new Platform(platWidth - 500, height, platLength, platColor);
+    //         let platRight = new Platform(platWidth + 500, height, platLength, platColor);
+    //
+    //         platformArray.push(plat);
+    //         platformArray.push(platLeft);
+    //         platformArray.push(platRight);
+    //         if(platColor === 'red') {
+    //           currentDeathSpaces += 1;
+    //           currentDeathSpaceCoverage += platLength;
+    //         }
+    //       } else {
+    //         platWidth += (150 - Math.floor(Math.random()*100));
+    //         emptyCount++;
+    //       }
+    //       debugger
+    // }
+
+    let currentWidthCoverage = 0;
+    let platWidth = 0;
+    let emptyCount = 0;
+    if(height === 400) {
+      // platformArray.push(new Platform(-500, 400, 100, "#eee"));
+      platformArray.push(new Platform(-400, height, 100, "green"));
+      platformArray.push(new Platform(-300, height, 100, "maroon"));
+      // platformArray.push(new Platform(-200, 400, 100, "#eee"));
+      platformArray.push(new Platform(-100, height, 100, "green"));
+
+      // platformArray.push(new Platform(0, 400, 100, "#eee"));
+      platformArray.push(new Platform(100, height, 100, "green"));
+      platformArray.push(new Platform(200, height, 100, "red"));
+      // platformArray.push(new Platform(300, 400, 100, "#eee"));
+      platformArray.push(new Platform(400, height, 100, "green"));
+
+      // platformArray.push(new Platform(500, 400, 100, "#eee"));
+      platformArray.push(new Platform(600, height, 100, "green"));
+      platformArray.push(new Platform(700, height, 100, "red"));
+      // platformArray.push(new Platform(800, 400, 100, "#eee"));
+      platformArray.push(new Platform(900, height, 100, "green"));
+    } else {
+      while(platWidth < 500) {
+        // debugger
+        let platLength = 150 - Math.floor(Math.random()*100);
+        if(platLength + platWidth > 500) {
+          platLength = 500 - platWidth;
+          if(platLength < 20) {
+            // debugger
+            break;
+          }
+        }
+        let colorArray = ['red', 'green'];
+        let colorChoice = 1;
+        if (maxdeathSpaces > currentDeathSpaces && maxdeathSpaceCoverage > currentDeathSpaceCoverage) {
+          colorChoice = Math.floor(Math.random()*2);
+        }
+        let platColor = colorArray[colorChoice];
+        let empty = Math.floor(Math.random()*2);
+        if(emptyCount === 0 && platWidth + platLength >= 400) {
+          empty = 1;
+          emptyCount++;
+        }
+        if(emptyCount >= 3) {
+          empty = 0;
+        }
+
+        if(empty === 0) {
+          // if(platLength + platWidth > 500) {
+          //   platLength = 500 - platWidth;
+          // }
+          // if(platLength + platWidth > 500) {
+          //   platLength = 500 - platWidth;
+          //   if(platLength < 20) {
+          //     // debugger
+          //     break;
+          //   }
+          // }
+
+          if(platColor === "red") {
+            platLength = 70 - Math.floor(Math.random()*50);
+            if(platLength + platWidth > 500) {
+              platLength = 500 - platWidth;
+            }
+            if(platLength + platWidth > 500) {
+              platLength = 500 - platWidth;
+              if(platLength < 20) {
+                // debugger
+                break;
+              }
+            }
+          }
+          let plat = new Platform(platWidth, height, platLength, platColor);
+          let platLeft = new Platform(platWidth - 500, height, platLength, platColor);
+          let platRight = new Platform(platWidth + 500, height, platLength, platColor);
+          platWidth += platLength;
+          // debugger
+          platformArray.push(plat);
+          platformArray.push(platLeft);
+          platformArray.push(platRight);
+          if(platColor === 'red') {
+            currentDeathSpaces += 1;
+            currentDeathSpaceCoverage += platLength;
+          }
+          // currentWidthCoverage = platWidth;
+        } else {
+          platWidth += (150 - Math.floor(Math.random()*100));
+          // currentWidthCoverage = platWidth;
+          emptyCount++;
         }
       }
-      return doesIt;
-    }
-    debugger
-    while(currentWidthCoverage < targetWidthCoverage) {
-      debugger
-      let platWidth = Math.floor(Math.random()*501);
-      let platLength = 150 - Math.floor(Math.random()*100);
-      let colorArray = ['red', 'green'];
-      let colorChoice = 1;
-      if (maxdeathSpaces > currentDeathSpaces && maxdeathSpaceCoverage > currentDeathSpaceCoverage) {
-        colorChoice = Math.floor(Math.random()*2);
-      }
-      let platColor = colorArray[colorChoice];
-      let plat = new Platform(platWidth, height, platLength, platColor);
-      debugger
-      // doesPlatformConflict(plat);
-      // while(doesPlatformConflict(plat) !== true) {
-      //   debugger
-      //  platWidth = 150 - Math.floor(Math.random()*100);
-      //  platLength = 150 - Math.floor(Math.random()*100);
-      //  colorArray = ['red', 'green'];
-      //  if (maxdeathSpaces < currentDeathSpaces && maxdeathSpaceCoverage < currentDeathSpaceCoverage) {
-      //    colorChoice = Math.floor(Math.random()*2);
-      //  } else {
-      //    colorChoice = 1;
-      //  }
-      //  platColor = colorArray[colorChoice];
-      //  plat = new Platform(platWidth, height, platLength, platColor);
-      //  debugger
-      // }
-      platformArray.push(plat);
-      let platLeft = new Platform(platWidth - 500, height, platLength, platColor);
-      let platRight = new Platform(platWidth + 500, height, platLength, platColor);
-      platformArray.push(platLeft);
-      platformArray.push(platRight);
-      currentWidthCoverage += platLength;
-      if(platColor === 'red') {
-        currentDeathSpaces += 1;
-        currentDeathSpaceCoverage += platLength;
+      if(platformArray.length === 0) {
+        let resPlatWidth = Math.floor(Math.random()*500);
+        let resPlatLength = 150 - Math.floor(Math.random()* 100);
+        let resColor = "green";
+        let rescuePlat = new Platform(resPlatWidth, height, resPlatLength, resColor);
+        let rescuePlatLeft = new Platform(resPlatWidth - 500, height, resPlatLength, resColor);
+        let rescuePlatRight = new Platform(resPlatWidth + 500, height, resPlatLength, resColor);
+        platformArray.push(rescuePlat);
+        platformArray.push(rescuePlatLeft);
+        platformArray.push(rescuePlatRight);
       }
     }
+
 
     // platformArray.push(new Platform(-500, 400, 100, "#eee"));
     // platformArray.push(new Platform(-400, height, 100, "red"));
@@ -270,6 +416,18 @@ this.canvas = document.getElementById("downfallCanvas");
     // // platformArray.push(new Platform(800, 400, 100, "#eee"));
     // platformArray.push(new Platform(900, height, 100, "green"));
 
+    // let platWidth = 0;
+    // let platLength = 175 - Math.floor(Math.random()*100);
+    // let colorArray = ['red', 'green'];
+    // let colorChoice = 1;
+    // if (maxdeathSpaces > currentDeathSpaces && maxdeathSpaceCoverage > currentDeathSpaceCoverage) {
+    //   colorChoice = Math.floor(Math.random()*2);
+    // }
+    // let empty = Math.floor(Math.random()*2);
+
+
+
+
     let linkedplatform = new LinkedPlatform(platformArray);
     return linkedplatform;
   }
@@ -280,8 +438,11 @@ this.canvas = document.getElementById("downfallCanvas");
     for(let i = 0; i < 100; i++) {
       let linkedplatform = linkedPlatform(height);
       linkedplatforms.push(linkedplatform);
-      height += 200;
+      height += 125;
     }
+    let winPlatform = new Platform(-500, height + 50, 1500, "gold");
+    let winLinkedPlatform = new LinkedPlatform([winPlatform]);
+    linkedplatforms.push(winLinkedPlatform);
     let levelBuilder = new LevelBuilder(linkedplatforms);
     return levelBuilder;
   }
@@ -325,6 +486,12 @@ this.canvas = document.getElementById("downfallCanvas");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
     let pD = platformDetection();
+    if(pD === "endgame") {
+      gameEnd();
+    }
+    if (pD === "wingame") {
+      gameWin();
+    }
     // platformDetection();
     // let count = 200;
     if(pD) {
@@ -352,13 +519,17 @@ this.canvas = document.getElementById("downfallCanvas");
       // ballDisplacement = 103;
       let countball = 100;
       if (countball !== 0) {
-        bally += balldy
+        bally += balldy;
         countball -= balldy;
+        // bally += 10;
+        // countball -= 10;
       }
       let countPlat = 100;
       if(countPlat !== 0) {
         linkplatformdy -= 5;
         countPlat -= 5;
+        // linkplatformdy -= 20;
+        // countPlat -= 20;
       }
       // debugger
       if(levelsBuilder.linkedplatforms[0].platforms[0].platformy + linkplatformdy < 400) {
@@ -415,9 +586,9 @@ this.canvas = document.getElementById("downfallCanvas");
 
     levelsBuilder.renderLevel(linkplatformdx, linkplatformdy);
     if(rightPressed) {
-         linkplatformdx += 8;
+         linkplatformdx += 6;
        } else if (leftPressed) {
-         linkplatformdx -= 8;
+         linkplatformdx -= 6;
        }
     bally -= balldy;
     // debugger
@@ -465,8 +636,71 @@ this.canvas = document.getElementById("downfallCanvas");
     // levelsBuilder.renderLevel(linkplatformdx, linkplatformdy);
     count -= 200;
     // debugger
-    console.log('moving');
+    // console.log('moving');
   }
+  }
+
+  function restartGame() {
+
+    ballx = 160;
+    bally = 330;
+    ballMaxUpwardMovement = 50;
+    balldx = 5;
+    balldy = 5;
+    ballrad = 10;
+    ballDisplacement = 90;
+    lowestPoint = 390;
+
+    maxlinkdx = 500;
+    linkplatformdx = 0;
+
+
+    linkplatformdy = 0;
+
+    rightPressed = false;
+    leftPressed = false;
+
+    levelsBuilder = levels();
+
+    document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("keydown", keyDownHandler, false);
+
+     count = 0;
+     dropCounter = 0;
+
+    // cancelAnimationFrame(startAnimationId);
+    // cancelAnimationFrame(id);
+    // debugger
+    // animate();
+  }
+
+  window.restart = restartGame;
+
+  function gameEnd() {
+    document.removeEventListener("keyup", keyUpHandler, false);
+    document.removeEventListener("keydown", keyDownHandler, false);
+    rightPressed = false;
+    leftPressed = false;
+    // linkplatformdy = x;
+    // linkplatformdx = y;
+    balldy = 0;
+    ctx.font = "50px Verdana";
+    ctx.fillStyle = "red";
+    ctx.fillText("Game Over", 120, 200);
+    // cancelAnimationFrame(id);
+  }
+
+  function gameWin() {
+    document.removeEventListener("keyup", keyUpHandler, false);
+    document.removeEventListener("keydown", keyDownHandler, false);
+    rightPressed = false;
+    leftPressed = false;
+    // linkplatformdy = x;
+    // linkplatformdx = y;
+    balldy = 0;
+    ctx.font = "80px Verdana";
+    ctx.fillStyle = "gold";
+    ctx.fillText("YOU WON!", 50, 200);
   }
 
   function platformDetection() {
@@ -509,10 +743,23 @@ this.canvas = document.getElementById("downfallCanvas");
         //     debugger
         //   }
 
+        // if( (ballLeft >= platformx && ballLeft <= platformx +
+        // platform.platformlength && ballBottom - 3 >= platformy && platform.color === "red") ||
+        // (ballRight >= platformx && ballRight <= platformx +
+        //   platform.platformlength && ballBottom -3 >= platformy && platform.color === "red")) {
+        //     gameEnd();
+        // }
+
         if( (ballLeft >= platformx && ballLeft <= platformx +
         platform.platformlength && ballBottom - 3 >= platformy) ||
         (ballRight >= platformx && ballRight <= platformx +
           platform.platformlength && ballBottom -3 >= platformy)) {
+
+          if(platform.color === "gold") {
+            return "wingame";
+          } else if(platform.color === "red") {
+            return "endgame";
+          } else {
             // debugger
           // (ballRight > platformx + linkplatformdx && ballRight < platformx +
             // platform.platformlength + linkplatformdx && ballBottom > platform.platformy + linkplatformdy)) {
@@ -521,13 +768,14 @@ this.canvas = document.getElementById("downfallCanvas");
           // toggle = true;
           // debugger
           return true;
-
+         }
           // debugger
         // } else if(ballBottom > platform.platformy) {
         //   debugger
         //   linkedplatform.status = 0;
       // }
-    }// else if ( (ballBottom === 405 ) && !((ballLeft >= platformx && ballLeft <= platformx +
+    }
+    // else if ( (ballBottom === 405 ) && !((ballLeft >= platformx && ballLeft <= platformx +
     // platform.platformlength && ballBottom - 3 >= platformy) ||
     // (ballRight >= platformx && ballRight <= platformx +
     //   platform.platformlength && ballBottom -3 >= platformy))) {
@@ -568,7 +816,7 @@ this.canvas = document.getElementById("downfallCanvas");
   // }
 
   function maxHeightDetection() {
-    if(ballDisplacement >= 103) {
+    if(ballDisplacement >= 90) {
       balldy = - balldy;
       ballDisplacement = 0;
     }
