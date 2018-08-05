@@ -1,3 +1,4 @@
+
 this.canvas = document.getElementById("downfallCanvas");
 this.ctx = canvas.getContext("2d");
 
@@ -185,7 +186,7 @@ this.ctx = canvas.getContext("2d");
   function drawBall() {
     ctx.beginPath();
     ctx.arc(ballx, bally, ballrad, 0, Math.PI*2);
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "#fffa00";
     ctx.fill();
     ctx.closePath();
   }
@@ -212,11 +213,14 @@ this.ctx = canvas.getContext("2d");
 
   let count = 0;
   let dropCounter = 0;
+  let height = 350;
 
   function animate() {
     let ballBottom = bally + ballrad;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
     renderScore();
     drawBall();
     let pD = platformDetection();
@@ -229,13 +233,22 @@ this.ctx = canvas.getContext("2d");
     if(pD) {
       count = 1;
       dropCounter = 0;
+      height = 350;
     }
     if(ballBottom === 405 && !pD) {
+      ctx.font = "30px Verdana";
+      ctx.fillStyle = "gold";
       let countball = 100;
       if (countball !== 0) {
         bally += balldy;
         countball -= balldy;
+        ctx.fillText(`+${dropCounter}`, 170, height);
+        height -= 5;
+        if(height < 210) {
+          height = 350;
+        }
       }
+      // height = 300;
       let countPlat = 100;
       if(countPlat !== 0) {
         linkplatformdy -= 5;
@@ -245,9 +258,6 @@ this.ctx = canvas.getContext("2d");
         levelsBuilder.linkedplatforms[0].status = 0;
         levelsBuilder.linkedplatforms.shift();
         score += 10 + dropCounter;
-        // let countScorePop = 60;
-        // let height = 300;
-        // renderPopScore(10 + dropCounter);
         dropCounter += 10;
       }
 
@@ -289,11 +299,11 @@ this.ctx = canvas.getContext("2d");
     ctx.fillText(`Score: ${score}`, 20, 30);
   }
 
-  function renderPopScore(scoreAddition) {
-    ctx.font = "20px Verdana";
-    ctx.fillStyle = "gold";
-    ctx.fillText(`+${scoreAddition}`, 170, 300);
-  }
+  // function renderPopScore(scoreAddition) {
+  //   ctx.font = "20px Verdana";
+  //   ctx.fillStyle = "gold";
+  //   ctx.fillText(`+${scoreAddition}`, 170, 300);
+  // }
 
   function restartGame() {
 
@@ -336,7 +346,7 @@ this.ctx = canvas.getContext("2d");
     ctx.fillText("Game Over", 120, 200);
     ctx.font = "50px Verdana";
     ctx.fillStyle = "gold";
-    ctx.fillText(`Your Score: ${score}`, 100, 300);
+    ctx.fillText(`Your Score: ${score}`, 50, 300);
   }
 
   function gameWin() {
@@ -348,6 +358,9 @@ this.ctx = canvas.getContext("2d");
     ctx.font = "80px Verdana";
     ctx.fillStyle = "gold";
     ctx.fillText("YOU WON!", 50, 200);
+    ctx.font = "50px Verdana";
+    ctx.fillStyle = "gold";
+    ctx.fillText(`Your Score: ${score}`, 50, 300);
   }
 
   function platformDetection() {
