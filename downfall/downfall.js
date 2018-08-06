@@ -348,7 +348,7 @@ this.ctx = canvas.getContext("2d");
     balldy = 0;
     ctx.font = "50px Verdana";
     ctx.fillStyle = "red";
-    ctx.fillText("Game Over", 100, 200);
+    ctx.fillText("Game Over", 120, 200);
     ctx.font = "30px Verdana";
     ctx.fillStyle = "gold";
     ctx.fillText(`Your Score: ${score}`, 120, 300);
