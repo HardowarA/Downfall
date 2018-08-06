@@ -214,7 +214,9 @@ this.ctx = canvas.getContext("2d");
   let count = 0;
   let dropCounter = 0;
   let height = 350;
-
+  let winGameCheck = 0;
+  let scoreRender = 0;
+  let initScore = score;
   function animate() {
     let ballBottom = bally + ballrad;
 
@@ -228,6 +230,10 @@ this.ctx = canvas.getContext("2d");
       gameEnd();
     }
     if (pD === "wingame") {
+      if(winGameCheck === 0) {
+        score += 500;
+        winGameCheck = 1;
+     }
       gameWin();
     }
     if(pD) {
@@ -236,19 +242,24 @@ this.ctx = canvas.getContext("2d");
       height = 350;
     }
     if(ballBottom === 405 && !pD) {
+      debugger
       ctx.font = "30px Verdana";
       ctx.fillStyle = "gold";
       let countball = 100;
       if (countball !== 0) {
         bally += balldy;
         countball -= balldy;
-        ctx.fillText(`+${dropCounter}`, 170, height);
+        if(scoreRender === 0) {
+        ctx.fillText(`+${dropCounter}`, 160, height);
         height -= 5;
-        if(height < 210) {
+        if(height < 180) {
           height = 350;
+          if(score === initScore) {
+            scoreRender = 1;
+          }
         }
       }
-      // height = 300;
+      }
       let countPlat = 100;
       if(countPlat !== 0) {
         linkplatformdy -= 5;
@@ -299,12 +310,6 @@ this.ctx = canvas.getContext("2d");
     ctx.fillText(`Score: ${score}`, 20, 30);
   }
 
-  // function renderPopScore(scoreAddition) {
-  //   ctx.font = "20px Verdana";
-  //   ctx.fillStyle = "gold";
-  //   ctx.fillText(`+${scoreAddition}`, 170, 300);
-  // }
-
   function restartGame() {
 
     ballx = 160;
@@ -343,10 +348,10 @@ this.ctx = canvas.getContext("2d");
     balldy = 0;
     ctx.font = "50px Verdana";
     ctx.fillStyle = "red";
-    ctx.fillText("Game Over", 120, 200);
-    ctx.font = "50px Verdana";
+    ctx.fillText("Game Over", 100, 200);
+    ctx.font = "30px Verdana";
     ctx.fillStyle = "gold";
-    ctx.fillText(`Your Score: ${score}`, 50, 300);
+    ctx.fillText(`Your Score: ${score}`, 120, 300);
   }
 
   function gameWin() {
@@ -357,10 +362,10 @@ this.ctx = canvas.getContext("2d");
     balldy = 0;
     ctx.font = "80px Verdana";
     ctx.fillStyle = "gold";
-    ctx.fillText("YOU WON!", 50, 200);
-    ctx.font = "50px Verdana";
+    ctx.fillText("YOU WON!", 40, 200);
+    ctx.font = "30px Verdana";
     ctx.fillStyle = "gold";
-    ctx.fillText(`Your Score: ${score}`, 50, 300);
+    ctx.fillText(`Your Score: ${score}`, 120, 300);
   }
 
   function platformDetection() {

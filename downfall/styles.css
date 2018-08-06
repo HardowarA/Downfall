@@ -2,12 +2,17 @@
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
+/* body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+} */
+
 html{
-  /* background-color: #000066; */
-  background-image: url('starry3.png');
+  background-image: url('starry5.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -17,6 +22,44 @@ canvas {
   background-repeat: no-repeat;
   background-size: cover;
 
+}
+
+body {
+  width: 100%;
+}
+
+.mainContent {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.description {
+  height: 400px;
+  margin-top: 10%;
+  margin-left: 10%;
+  width: 20%;
+  border: 1px solid gold;
+  background: black;
+  color: gold;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.sub-title {
+  display: flex;
+  justify-content: center;
+}
+
+.paragraph {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
 }
 
 .buttonDiv {
@@ -32,10 +75,58 @@ button {
   overflow: hidden;
   outline:none;
   border-radius: 5px;
-  background-color: blue;
+  background-color: lightblue;
   padding: 10px;
+  color: green;
+  font-weight: bold;
 }
 
 button:hover {
   background-color: yellow;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  overflow: hidden;
+
+}
+
+.linksContainer {
+  padding: 50px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.github {
+  width: 33%;
+}
+
+.linkedin {
+  width: 33%;
+}
+
+.portfolio {
+  width: 33%;
+}
+
+.github img {
+  width: 70%;
+  height: 80%;
+
+}
+
+.linkedin img {
+  width: 70%;
+  height: 80%;
+}
+
+.portfolio img {
+    width: 70%;
+    height: 80%;
 }
