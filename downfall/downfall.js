@@ -242,7 +242,6 @@ this.ctx = canvas.getContext("2d");
       height = 350;
     }
     if(ballBottom === 405 && !pD) {
-      debugger
       ctx.font = "30px Verdana";
       ctx.fillStyle = "gold";
       let countball = 100;
